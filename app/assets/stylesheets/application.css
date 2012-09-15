@@ -11,3 +11,68 @@
  *= require_self
  *= require_tree .
  */
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oswald Bold'), local('Oswald-Bold'), url(http://themes.googleusercontent.com/static/fonts/oswald/v5/dI-qzxlKVQA6TUC5RKSb37O3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+
+.header {
+  background-color: #222;
+  color: #999;
+}
+.header h1 {
+  width: 300px;
+  float: left;
+  color: #FFF;
+  font-family: 'Oswald', 'Helvetica Neue Condensed', 'Arial Narrow', sans-serif;
+}
+.header h1 a {
+  color: #FFF;
+}
+.header h1 a:hover {
+  color: #3CF;
+  text-decoration: none;
+}
+.header .user {
+  margin-top: 14px;
+}
+.header .user .nav {
+  margin-bottom: 0px;
+}
+.header .user-name {
+  display: block;
+  padding: 8px 12px;
+  margin: 2px 2px;
+  line-height: 14px;
+  /* color: #88C9D6; */
+  color: #EEE;
+}
+.header .user-name:hover {
+  color: #3CF;
+}
+.header .user-img {
+  margin-right: 0px;
+}
+.footer {
+  background-color: #222;
+  color: #CCC;
+  padding: 15px 0;
+  font-size: 12px;
+}
+.footer strong {
+  color: #EEE;
+}
+.footer p {
+  margin-bottom: 3px;
+}
+.footer a {
+  color: #3CF;
+}
+.footer a:hover {
+  color: #88C9D6;
+  text-decoration: none;
+}
+

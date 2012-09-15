@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Project96821</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <title>EarlGrey</title>
+    <!--link rel="shortcut icon" href="../assets/ico/favicon.ico"-->
+    <%= stylesheet_link_tag "bootstrap", :media => "all" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 class="pull-left"><a href="#">EarlGrey</a></h1>
+        <div class="user">
+          <div class="user-actions navbar-inverse pull-right">
+            <div class="user-img pull-left">
+              <img src="http://gravatar.com/avatar/10786514059e95ba3b89cfe0e096f22c?s=32" alt="">
+            </div>
+            <ul class="nav nav-pills pull-left">
+              <li><span class="user-name">Yang Piao</span></li>
+              <li><a href="#" title="">Profile</a></li>
+              <li><a href="#" title="">Sign Out</a></li>
+              <li><a href="#" title="">Log In</a></li>
+              <li><a href="#" title="">Sign Up</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
 
-<%= yield %>
+    <div class="container">
+      <section>
+        <p style="height: 200px">placeholder</p>
+        <%= yield %>
+      </section>
+    </div>
 
-</body>
+    <footer class="footer">
+      <div class="container">
+        <p><strong>EarlGrey</strong> - A product of team Maccha. | Made by Yang Piao (yp {at} cmu.edu)</p>
+        <p>This is the individual project of 96-821. The source code is on 
+        <a href="https://github.com/yangpiao/96821-project" title="GitHub Page">GitHub</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
 </html>
+
