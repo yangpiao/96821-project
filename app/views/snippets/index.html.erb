@@ -1,0 +1,48 @@
+<% provide :title, 'All Snippets' %>
+
+<div class="snippet-list content">
+  <div class="content-box">
+    <ol>
+      <% @snippets.each do |snippet| %>
+      <li class="snippet">
+        <div class="snippet-info">
+          <%= link_to "#{snippet.name}", snippet, class: 'snippet-name', title: 'Show this snippet' %>
+          <span class="snippet-author">&raquo; Created by <strong>#{User Name}</strong></span>
+          <span class="snippet-type label pull-right"><%= @typenames[snippet.filetype] %></span>
+        </div>
+        <div class="snippet-desc">
+          <strong>Description</strong>: <%= snippet.desc %>
+        </div>
+      </li>
+      <% end %>
+    </ol>
+  </div>
+
+<!--
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Desc</th>
+    <th>Filetype</th>
+    <th>Content</th>
+    <th>Time</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @snippets.each do |snippet| %>
+  <tr>
+    <td><%= snippet.name %></td>
+    <td><%= snippet.desc %></td>
+    <td><%= snippet.filetype %></td>
+    <td><%= snippet.content %></td>
+    <td><%= snippet.time %></td>
+    <td><%= snippet.user_id %></td>
+  </tr>
+<% end %>
+</table>
+-->
+</div>
+

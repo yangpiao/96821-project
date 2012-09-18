@@ -1,0 +1,72 @@
+<% provide :title, "Snippet ##{@snippet.id}" %>
+<% provide :jsfile, 'snippet.show' %>
+
+<div class="snippet-box content">
+  <div class="alert alert-success clearfix">
+    <div class="snippet-name">
+      <strong><%= @snippet.name %></strong>
+    </div>
+    <div class="snippet-author">
+      Created by <strong>#{User's Name}</strong>
+    </div>
+  </div>
+  <div class="box-body content-box">
+    <!--
+    <div class="snippet-info well well-small clearfix">
+      <div class="snippet-name">
+        <strong><%= @snippet.name %></strong>
+      </div>
+      <div class="snippet-author">
+        Created by <strong>#{User's Name}</strong>
+      </div>
+    </div>
+    -->
+    <div class="snippet-desc"><%= @snippet.desc %></div>
+    <div id="codebox" class="snippet-code">
+      <span class="label label-inverse"><%= @typenames[@snippet.filetype] %></span>
+      <% if @typenames[@snippet.filetype].empty? %>
+<pre class="prettyprint linenums c-off"><code><%= @snippet.content %></code></pre>
+      <% else %>
+<pre class="prettyprint linenums c-on"><code class="language-<%= @typenames[@snippet.filetype] %>"><%= @snippet.content %></code></pre>
+      <% end %>
+<script>prettyPrint();</script>
+
+      <!-- comment popover -->
+      <div id="comment-popover" class="comments popover right">
+        <div class="arrow"></div>
+        <h3 class="popover-title">Comments<button type="button" id="close-cmt" class="close">×</button></h3>
+        <div class="popover-content">
+          <div class="comments-inner"><ol></ol></div>
+          <div class="comment-form">
+            <p id="comment-tip" class="alert" style="display: none">You need to log in before adding a comment.</p>
+            <div class="comment-head pull-left">
+              <img src="http://gravatar.com/avatar/10786514059e95ba3b89cfe0e096f22c?s=32" alt="">
+            </div>
+            <div class="comment-body">
+              <textarea id="comment-input" placeholder="Add some comments..." rows="2"></textarea>
+            </div>
+            <div class="comment-action">
+              <a href="#" id="cancel-cmt" class="btn">Cancel</a>&nbsp;&nbsp;
+              <a href="#" id="submit-cmt" class="btn btn-info">Submit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="snippet-actions">
+      <%= link_to 'Edit', edit_snippet_path(@snippet), class: 'snippet-edit btn' %>
+      <%= link_to 'Delete', @snippet, id: 'delete-snippet', class: 'snippet-delete btn btn-danger' %>
+    </div>
+  </div>
+</div>
+
+<script>
+gEarlGreyData = {
+  snippetID: <%= @snippet.id %>,
+  CMT_GET: '<%= snippet_comments_path @snippet %>.json',
+  CMT_CREATE: '<%= snippet_comments_path @snippet %>.json',
+  CMT_DELETE: '<%= snippet_path @snippet %>',
+};
+</script>
+

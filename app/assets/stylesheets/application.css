@@ -76,3 +76,42 @@
   text-decoration: none;
 }
 
+.snippet-form, .snippet-box {
+  margin: 50px auto;
+  width: 780px;
+}
+.snippet-form textarea {
+  resize: none;
+  width: 726px;
+}
+.snippet-form .form-legend {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.snippet-form .form-body, .snippet-box .box-body {
+  padding: 19px;
+  background-color: white;
+  border: 1px solid #DDD;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.snippet-form .form-body form {
+  margin-bottom: 0;
+}
+.snippet-form .form-name {
+  float: left;
+  width: 250px;
+}
+.snippet-form .form-filetype {
+  float: right;
+  /* width: ; */
+}
+.snippet-form .form-desc {
+}
+.snippet-form .form-code textarea {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.snippet-form .form-action {
+}
+

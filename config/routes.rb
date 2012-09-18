@@ -1,5 +1,9 @@
 Project96821::Application.routes.draw do
-  # root :to
+  resources :snippets do
+    resources :comments
+  end
+
+  root :to => 'snippets#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -31,7 +31,7 @@ group :production do
 end
 
 gem 'devise', '2.1.0'
-gem 'coderay', '1.0.7'
+# gem 'coderay', '1.0.7'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,0 +1,51 @@
+<div class="snippet-form content">
+  <p class="form-legend alert alert-info">
+    <strong>EarlGrey</strong> is a tool to share code with others, 
+    and to see comments on your code.
+  </p>
+  <div class="form-body content-box">
+    <%= form_for(@snippet, :html => {:class => ''}) do |f| %>
+      <div class="clearfix">
+        <div class="form-name">
+          <%= f.text_field :name, :size => 20, :class => '', :placeholder => 'Snippet Name' %>
+        </div>
+        <div class="form-filetype btn-toolbar">
+          <div class="btn-group">
+            <a href="#" class="type btn" data-value="0" id="default-type">Text</a>
+            <a href="#" class="type btn" data-value="1">HTML</a>
+            <a href="#" class="type btn" data-value="2">CSS</a>
+            <a href="#" class="type btn" data-value="3">JavaScript</a>
+            <a href="#" class="type btn" data-value="4">Ruby</a>
+          </div>
+          <div class="btn-group">
+            <a class="more-btn btn dropdown-toggle" data-toggle="dropdown" href="#"><em>More </em><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a class="type-more" tabindex="-1" href="#" data-value="5">C/C++</a></li>
+              <li><a class="type-more" tabindex="-1" href="#" data-value="6">Java</a></li>
+              <li><a class="type-more" tabindex="-1" href="#" data-value="7">Python</a></li>
+              <li><a class="type-more" tabindex="-1" href="#" data-value="8">XML</a></li>
+              <!--li><a tabindex="-1" href="#">PHP</a></li-->
+              <!--li><a tabindex="-1" href="#">JSON</a></li-->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="form-desc">
+        <%= f.text_area :desc, :rows => 2, :class => '', :placeholder => 'Snippet Descrition' %>
+      </div>
+      <div class="form-code">
+        <%= f.text_area :content, :rows => 15, :class => '', :placeholder => '// Paste some code here...' %>
+      </div>
+      <%= f.hidden_field :filetype %>
+      <%= f.hidden_field :user_id %>
+      <div class="form-action clearfix">
+      <% if f.object.new_record? %>
+        <%= f.submit 'Create Snippet', :class => 'btn btn-info' %>
+        <a href="<%= snippets_path %>" title="View all snippets" class="view-all pull-right">View all snippets &raquo;</a>
+      <% else %>
+        <%= f.submit 'Update', :class => 'btn btn-info' %>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
