@@ -83,6 +83,7 @@
     $popover.css('top', pos.top - 40);
     // $popover.show();
     $popover.fadeIn(200);
+    return false;
   });
 
   $closebtn.click(function(e) {

@@ -18,6 +18,7 @@
     this.className += ' btn-inverse';
     _$currBtn = $(this);
     $hiddenFiletype.val(_$currBtn.data('value'));
+    return false;
   });
   $filetypes.delegate('.type-more', 'click', function(e) {
     _initBtns();
@@ -25,6 +26,7 @@
     $more.addClass('btn-inverse');
     _$currBtn = $more;
     $hiddenFiletype.val($(this).data('value'));
+    return false;
   });
 
   // init

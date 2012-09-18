@@ -41,7 +41,9 @@
       <div class="form-action clearfix">
       <% if f.object.new_record? %>
         <%= f.submit 'Create Snippet', :class => 'btn btn-info' %>
+        <!--
         <a href="<%= snippets_path %>" title="View all snippets" class="view-all pull-right">View all snippets &raquo;</a>
+        -->
       <% else %>
         <%= f.submit 'Update', :class => 'btn btn-info' %>
       <% end %>
