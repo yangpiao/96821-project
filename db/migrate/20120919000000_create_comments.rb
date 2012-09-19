@@ -1,7 +1,7 @@
 class CreateComments < ActiveRecord::Migration
   def change
     create_table :comments do |t|
-      t.string :content
+      t.text :content, :limit => 100000
       t.integer :snippet_id, :default => 0
       t.integer :linenum, :default => 0
       t.integer :user_id, :default => 0
@@ -11,4 +11,5 @@ class CreateComments < ActiveRecord::Migration
     end
   end
 end
+
 
