@@ -59,7 +59,7 @@
       $sdesc.addClass('error');
       $sdescError.text('Description cannot be empty');
       return false;
-    } else if (v.length > 50) {
+    } else if (v.length > 10000) {
       $sdesc.addClass('error');
       $sdescError.text('Description cannot be over 10000 characters');
       return false;
@@ -75,7 +75,7 @@
       $scode.addClass('error');
       $scodeError.text('Code cannot be empty');
       return false;
-    } else if (v.length > 50) {
+    } else if (v.length > 10000000) {
       $scode.addClass('error');
       $scodeError.text('Code cannot be over 10000000 characters');
       return false;
