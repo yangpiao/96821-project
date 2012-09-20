@@ -7,9 +7,11 @@
     <%= form_for(@snippet, :html => {:class => ''}) do |f| %>
       <div class="clearfix">
         <div class="form-name">
+          <h4>Name<span id="name-error" class="notice"></span></h4>
           <%= f.text_field :name, :size => 20, :class => '', :placeholder => 'Snippet Name' %>
         </div>
         <div class="form-filetype btn-toolbar">
+          <h4>Type</h4>
           <div class="btn-group">
             <a href="#" class="type btn" data-value="0" id="default-type">Text</a>
             <a href="#" class="type btn" data-value="1">HTML</a>
@@ -31,16 +33,18 @@
         </div>
       </div>
       <div class="form-desc">
+        <h4>Description<span id="desc-error" class="notice"></span></h4>
         <%= f.text_area :desc, :rows => 2, :class => '', :placeholder => 'Snippet Descrition' %>
       </div>
       <div class="form-code">
+        <h4>Code<span id="code-error" class="notice"></span></h4>
         <%= f.text_area :content, :rows => 15, :class => '', :placeholder => '// Paste some code here...' %>
       </div>
       <%= f.hidden_field :filetype %>
       <%= f.hidden_field :user_id %>
       <div class="form-action clearfix">
       <% if f.object.new_record? %>
-        <%= f.submit 'Create Snippet', :class => 'btn btn-info' %>
+        <%= f.submit 'Create Snippet', :class => 'btn btn-info', :id => 'submit-btn' %>
         <!--
         <a href="<%= snippets_path %>" title="View all snippets" class="view-all pull-right">View all snippets &raquo;</a>
         -->

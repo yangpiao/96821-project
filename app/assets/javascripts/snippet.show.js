@@ -7,12 +7,6 @@
     $closebtn =$('#close-cmt'),
     $cancel = $('#cancel-cmt'),
     $delBtn = $('#delete-snippet'),
-    // tipDlg
-    $dlg = $('#tipDlg').modal({show: false}),
-    $dlghd = $('#tipDlg-hd').html('Error'),
-    $dlgbd = $('#tipDlg-bd'),
-    $dlgc = $('#tipDlg-c'),
-    $dlgs = $('#tipDlg-s'),
 
     $cmtlist = $popover.find('.comments-inner ol'),
     $cmtbd = $cmtlist.parent(),
@@ -20,6 +14,7 @@
     $cmtInput = $('#comment-input'),
     $cmtCancel = $('#cancel-cmt'),
     $cmtSubmit = $('#submit-cmt'),
+    $cmtError = $('#comment-error'),
 
     _comments = null,
     _$currLine = null,
@@ -97,6 +92,9 @@
 
   // post a comment
   $cmtSubmit.click(function(e) {
+    if (!_validate_cmt()) {
+      return false;
+    }
     var params, cmt = $cmtInput.val();
     params = {
       comment: {
@@ -151,6 +149,27 @@
     return false;
   });
 
+  // validations
+  function _validate_cmt() {
+    var v = $.trim($cmtInput.val());
+    if (v.length == 0) {
+      $cmtInput.addClass('error');
+      $cmtError.text('Comment cannot be empty');
+      return false;
+    } else if (v.length > 5000) {
+      $cmtInput.addClass('error');
+      $cmtError.text('Comment cannot be over 5000 characters');
+      return false;
+    } else {
+      $cmtInput.removeClass('error');
+      $cmtError.text('');
+      return true;
+    }
+  }
+  $cmtInput.on('blur', function(e) {
+    _validate_cmt();
+  });
+
   // init
   $.ajax({
     url: CMT_GET,
@@ -172,8 +191,8 @@
     },
     error: function() {
       _comments = {};
-      $dlgbd.html('<p class="alert alert-error">An error has occurred ' +
-        'while loading the comments.</p>');
+      // $dlgbd.html('<p class="alert alert-error">An error has occurred ' +
+      //   'while loading the comments.</p>');
     }
   });
 })(window, jQuery);

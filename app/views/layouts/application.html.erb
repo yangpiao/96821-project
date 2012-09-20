@@ -53,14 +53,44 @@
       </div>
       <div id="tipDlg-bd" class="modal-body"></div>
       <div class="modal-footer">
-        <a href="#" id="tipDlg-c" class="btn">Cancel</a>
+        <a href="#" id="tipDlg-c" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
         <a href="#" id="tipDlg-s" class="btn btn-primary">OK</a>
       </div>
     </div>
 
     <%= javascript_include_tag "jquery" %>
     <%= javascript_include_tag "bootstrap" %>
+    <%= javascript_include_tag "snippet.base" %>
     <%= javascript_include_tag(yield :jsfile) %>
+    <!--[if IE]>
+    <script>
+      var dlg = gEarlGreyCommon.dlg;
+      dlg.set({
+        hd: 'Oops...',
+        bd: 'This website currently does not support Internet Explorer. Please use latest Chrome/Firefox/Safari/Opera to make web browsing faster, safer and easier.',
+        hideOk: true,
+        hideCancel: true,
+        hideClose: true
+      });
+      dlg.show();
+    </script>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+    <script>
+    /*if (!(window.ActiveXObject && document.documentMode)) {
+      var dlg = gEarlGreyCommon.dlg;
+      dlg.set({
+        hd: 'Oops...',
+        bd: 'You are using a really old browser, so the page will not be rendered properly. Please upgrade to Internet Explorer 8 or higher, or use latest Chrome/Firefox/Safari/Opera, to make web browsing faster, safer and easier.',
+        hideOk: true,
+        hideCancel: true,
+        hideClose: true
+      });
+      dlg.show();
+    }*/
+    </script>
+    <![endif]-->
   </body>
 </html>
 

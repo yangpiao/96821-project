@@ -63,7 +63,8 @@ class SnippetsController < ApplicationController
         format.html { redirect_to @snippet, notice: 'Snippet was successfully created.' }
         format.json { render json: @snippet, status: :created, location: @snippet }
       else
-        format.html { render action: "new" }
+        # format.html { render action: "new" }
+        format.html { redirect_to :root, notice: 'An error has occurred.' }
         format.json { render json: @snippet.errors, status: :unprocessable_entity }
       end
     end

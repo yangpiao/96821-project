@@ -35,6 +35,7 @@ class CommentsController < ApplicationController
         # format.json { render json: @comment, status: :ok, location: @comment }
         format.json { render json: @comment, status: :ok }
       else
+        # format.json { render json: @comment.errors, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
