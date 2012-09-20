@@ -75,6 +75,8 @@
     }
     $cmtlist.html(html);
     $cmtInput.val('');
+    $cmtInput.removeClass('error');
+    $cmtError.text('');
     $popover.css('top', pos.top - 40);
     // $popover.show();
     $popover.fadeIn(200);
