@@ -177,6 +177,18 @@
 .snippet-box .snippet-edit {
   margin-right: 10px;
 }
+.snippet-legend {
+  border: 1px dotted #AAA;
+  padding: 10px 15px;
+  color: #888;
+  margin-bottom: 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.snippet-legend p {
+  margin: 0;
+}
 
 /* comments */
 .snippet-box .snippet-code {
