@@ -1,7 +1,16 @@
 Project96821::Application.routes.draw do
+  devise_for :users do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+    get '/users/profile' => 'devise/registrations#edit'
+  end
+
   resources :snippets do
     resources :comments
   end
+
+  # resources :users do
+  #   resources :snippets
+  # end
 
   root :to => 'snippets#new'
 

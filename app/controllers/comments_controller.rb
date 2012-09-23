@@ -1,30 +1,15 @@
 class CommentsController < ApplicationController
   before_filter :get_snippet
+  before_filter :authenticate_user!, :only => [:create, :destroy]
   respond_to :json
 
   # GET /comments.json
   def index
     @comments = @snippet.comments.order('linenum ASC')
     respond_to do |format|
-      format.json { render json: @comments }
+      format.json { render json: @comments.to_json(:include => :user) }
     end
   end
-
-  # GET /comments/1.json
-  # def show
-  #   @comment = Comment.find(params[:id])
-  #   respond_to do |format|
-  #     format.json { render json: @comment }
-  #   end
-  # end
-
-  # GET /comments/new.json
-  # def new
-  #   @comment = @snippet.comments.build
-  #   respond_to do |format|
-  #     format.json { render json: @comment }
-  #   end
-  # end
 
   # POST /comments.json
   def create
@@ -33,7 +18,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         # format.json { render json: @comment, status: :ok, location: @comment }
-        format.json { render json: @comment, status: :ok }
+        format.json { render json: @comment.to_json(:include => :user), status: :ok }
       else
         # format.json { render json: @comment.errors, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

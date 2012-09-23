@@ -39,7 +39,11 @@
         <%= f.text_area :content, :rows => 15, :class => '', :placeholder => '// Paste some code here...' %>
       </div>
       <%= f.hidden_field :filetype %>
-      <%= f.hidden_field :user_id %>
+      <% if user_signed_in? %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+      <% else %>
+        <%= f.hidden_field :user_id %>
+      <% end %>
       <div class="form-action clearfix">
       <% if f.object.new_record? %>
         <%= f.submit 'Create Snippet', :class => 'btn btn-info', :id => 'submit-btn' %>

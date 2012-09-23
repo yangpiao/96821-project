@@ -18,16 +18,23 @@
         <h1 class="pull-left"><%= link_to 'EarlGrey', root_path %></h1>
         <div class="user">
           <div class="user-actions navbar-inverse pull-right">
-            <div class="user-img pull-left">
-              <img src="http://gravatar.com/avatar/10786514059e95ba3b89cfe0e096f22c?s=32" alt="">
-            </div>
-            <ul class="nav nav-pills pull-left">
-              <li><span class="user-name">Yang Piao</span></li>
-              <li><a href="#" title="">Profile</a></li>
-              <li><a href="#" title="">Sign Out</a></li>
-              <li><a href="#" title="">Log In</a></li>
-              <li><a href="#" title="">Sign Up</a></li>
-            </ul>
+            <% if user_signed_in? %>
+              <div class="user-img pull-left">
+                <a id="u-gravatar" href="http://gravatar.com/" title="Go to Gravatar.com and change your profile image" rel="tooltip" data-placement="bottom" target="_blank"><img src="http://gravatar.com/avatar/<%= current_user.avatar %>?s=32" alt=""></a>
+              </div>
+              <ul class="nav nav-pills pull-left">
+                <li><span id="u-name" class="user-name"><%= current_user.name %></span></li>
+                <li><a id="u-profile" href="<%= edit_user_registration_path %>" title="My Profile">Profile</a></li>
+                <li><a id="u-signout" href="<%= destroy_user_session_path %>" title="Sign Out">Sign Out</a></li>
+              </ul>
+            <% else %>
+              <ul class="nav nav-pills pull-left">
+                <li>
+                <a id="u-login" href="<%= new_user_session_path %>" title="Log In">Log In</a>
+                </li>
+                <li><a id="u-signup" href="<%= new_user_registration_path %>" title="Sign Up">Sign Up</a></li>
+              </ul>
+            <% end %>
           </div>
         </div>
       </div>
@@ -58,10 +65,70 @@
       </div>
     </div>
 
+    <div id="loginDlg" class="user-dlg modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Log In</h3>
+      </div>
+      <%= form_for("user", :url => user_session_path, :html => { :class => "login-form" }) do |f| %>
+      <div class="modal-body">
+        <%= f.label :email do %>
+          Email<span id="login-email-err" class="error"></span>
+        <% end %>
+        <%= f.email_field :email, :class => "input-xlarge" %>
+        <%= f.label :password do %>
+          Password<span id="login-pass-err" class="error"></span>
+        <% end %>
+        <%= f.password_field :password, :class => "input-xlarge" %>
+        <%= f.label :remember_me, :class => "checkbox" do %>
+          <%= f.check_box :remember_me %> Remember me
+        <% end %>
+      </div>
+      <div class="modal-footer login-actions">
+        <%= f.submit "Log In", :class => "btn btn-primary", :id => "user-login" %>
+        <%= link_to "Forgot password?", new_password_path('user'), :class => "forgot-pass" %>
+      </div>
+      <% end %>
+    </div>
+
+    <div id="signupDlg" class="user-dlg modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Sign Up</h3>
+      </div>
+      <%= form_for("user", :url => user_registration_path, :html => { :class => "login-form" }) do |f| %>
+      <div class="modal-body">
+        <%= f.label :name do %>
+          Name<span id="signup-name-err" class="error"></span>
+        <% end %>
+        <%= f.text_field :name, :class => "input-xlarge" %>
+        <label for="user_email_s">
+          Email<span id="signup-email-err" class="error"></span>
+        </label>
+        <input class="input-xlarge" id="user_email_s" name="user[email]" size="30" type="email">
+        <label for="user_password_s">
+          Password<span id="signup-pass-err" class="error"></span>
+        </label>
+        <input class="input-xlarge" id="user_password_s" name="user[password]" size="30" type="password">
+        <%= f.label :password_confirmation do %>
+          Confirm Password<span id="signup-pass-c-err" class="error"></span>
+        <% end %>
+        <%= f.password_field :password_confirmation, :class => "input-xlarge" %>
+      </div>
+      <div class="modal-footer login-actions">
+        <%= f.submit "Sign Up", :class => "btn btn-primary", :id => "user-signup" %>
+      </div>
+      <% end %>
+    </div>
+
+    <script>var gEarlGreyUser = <%= raw current_user.to_json %></script>
     <%= javascript_include_tag "jquery" %>
     <%= javascript_include_tag "bootstrap" %>
     <%= javascript_include_tag "snippet.base" %>
+    <% if not (yield :jsfile).empty? %>
     <%= javascript_include_tag(yield :jsfile) %>
+    <% end %>
+
     <!--[if IE]>
     <script>
       var dlg = gEarlGreyCommon.dlg;

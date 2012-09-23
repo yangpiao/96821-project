@@ -7,7 +7,7 @@
       <strong><%= @snippet.name %></strong>
     </div>
     <div class="snippet-author">
-      Created by <strong>#{User's Name}</strong>
+      Created by <strong><%= @snippet.user.name %></strong>
     </div>
   </div>
   <div class="box-body content-box">
@@ -32,27 +32,34 @@
         <div class="popover-content">
           <div class="comments-inner"><ol></ol></div>
           <div class="comment-form">
-            <p id="comment-tip" class="alert" style="display: none">You need to log in before adding a comment.</p>
-            <div class="comment-head pull-left">
-              <img src="http://gravatar.com/avatar/10786514059e95ba3b89cfe0e096f22c?s=32" alt="">
-            </div>
-            <div class="comment-body">
-              <textarea id="comment-input" placeholder="Add some comments..." rows="2"></textarea>
-            </div>
-            <div class="comment-action">
-              <span id="comment-error" class="notice"></span>
-              <a href="#" id="cancel-cmt" class="btn">Cancel</a>&nbsp;&nbsp;
-              <a href="#" id="submit-cmt" class="btn btn-info">Submit</a>
-            </div>
+            <p id="comment-tip" style="display: none"></p>
+            <% if not user_signed_in? %>
+              <p class="alert">You need to log in before adding a comment.</p>
+            <% else %>
+              <div class="comment-head pull-left">
+                <img src="http://gravatar.com/avatar/<%= current_user.avatar %>?s=32" alt="">
+              </div>
+              <div class="comment-body">
+                <textarea id="comment-input" placeholder="Add some comments..." rows="2"></textarea>
+                <input id="comment-userid" type="hidden" value="<%= current_user.id %>">
+              </div>
+              <div class="comment-action">
+                <span id="comment-error" class="notice"></span>
+                <a href="#" id="cancel-cmt" class="btn">Cancel</a>&nbsp;&nbsp;
+                <a href="#" id="submit-cmt" class="btn btn-info">Submit</a>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
 
+    <% if user_signed_in? and current_user.id == @snippet.user.id %>
     <div class="snippet-actions">
       <%= link_to 'Edit', edit_snippet_path(@snippet), class: 'snippet-edit btn' %>
       <%= link_to 'Delete', @snippet, id: 'delete-snippet', class: 'snippet-delete btn btn-danger' %>
     </div>
+    <% end %>
   </div>
 </div>
 

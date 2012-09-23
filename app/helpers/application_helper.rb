@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 module ApplicationHelper
   def page_title(title)
     base = 'EarlGrey'
@@ -17,6 +19,14 @@ module ApplicationHelper
         tags << javascript_include_tag(f)
       end
       tags
+    end
+  end
+
+  def calc_hash(email)
+    if (not email.empty?)
+      Digest::MD5.hexdigest(email.downcase)
+    else
+      ""
     end
   end
 end

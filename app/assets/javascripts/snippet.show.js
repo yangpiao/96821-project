@@ -1,6 +1,5 @@
 // ===== page snippets/:id =====
 (function(host, $) {
-  // gSnippetID = host['gSnippetID'] || 0;
   var $popover = $('#comment-popover'),
     $codebox = $('#codebox'),
     $lines = $codebox.find('.linenums li'),
@@ -11,11 +10,13 @@
     $cmtlist = $popover.find('.comments-inner ol'),
     $cmtbd = $cmtlist.parent(),
     $cmtTip = $('#comment-tip'),
-    $cmtInput = $('#comment-input'),
     $cmtCancel = $('#cancel-cmt'),
     $cmtSubmit = $('#submit-cmt'),
     $cmtError = $('#comment-error'),
+    $cmtInput = $('#comment-input'),
+    $cmtUserId = $('#comment-userid'),
 
+    _user = gEarlGreyUser || {},
     _comments = null,
     _$currLine = null,
     _currLineNum = 0,
@@ -30,14 +31,15 @@
     NOCMT_MSG = 'No comments on this line right now.',
 
     _buildComment = function(cmt) {
-      // TODO: user info
+      // TODO
+      var user = cmt.user;
+      var img = 'http://gravatar.com/avatar/' + user.avatar + '?s=32';
       var result = '<li class="comment clearfix" data-id="' + cmt.id + '">' +
-        '<div class="comment-head pull-left"><img src="' +
-        'http://gravatar.com/avatar/' + '10786514059e95ba3b89cfe0e096f22c' +
-        '?s=32" alt=""></div><div class="comment-body">' +
-        '<p class="comment-author"><strong>' + 'Yang Piao' + '</strong>' +
-        ':</p><p>' + cmt.content +
-        '</p></div></li>';
+        '<div class="comment-head pull-left"><img src="' + img +
+        '" alt=""></div><div class="comment-body">' +
+        '<p class="comment-author"><strong>' + 
+        (user.name || '[Unknown User]') +
+        '</strong>:</p><p>' + cmt.content + '</p></div></li>';
       return result;
     },
 
@@ -100,7 +102,7 @@
     var params, cmt = $cmtInput.val();
     params = {
       comment: {
-        user_id: 1, // TODO: user id
+        user_id: $cmtUserId.val(),
         content: cmt,
         linenum: _currLineNum
       }
@@ -109,6 +111,10 @@
       url: CMT_CREATE,
       type: 'POST',
       data: params,
+      beforeSend: function(xhr) {
+        var token = $('meta[name="csrf-token"]').attr('content');
+        if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+      },
       success: function(data) {
         $cmtInput.val('');
         var html = _buildComment(data), $newnode,
@@ -139,6 +145,8 @@
         dataType: 'json',
         contentType: 'application/json',
         beforeSend: function(xhr) {
+          var token = $('meta[name="csrf-token"]').attr('content');
+          if (token) xhr.setRequestHeader('X-CSRF-Token', token);
           xhr.setRequestHeader('X-Http-Method-Override', 'DELETE');
         },
         success: function(data) {

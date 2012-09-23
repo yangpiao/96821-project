@@ -2,6 +2,7 @@
 
 class SnippetsController < ApplicationController
   before_filter :typenames, only: [:index, :show]
+  before_filter :authenticate_user!, :only => [:edit, :update, :destroy]
 
   def typenames
     @types = ['', 'html', 'css', 'js', 'rb', 'c', 'java', 'py', 'xml']
