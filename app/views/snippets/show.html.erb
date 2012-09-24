@@ -7,7 +7,9 @@
       <strong><%= @snippet.name %></strong>
     </div>
     <div class="snippet-author">
-      Created by <strong><%= @snippet.user.name %></strong>
+      Created by <strong>
+        <% if @snippet.user %><%= @snippet.user.name %><% else %>Guest<% end %>
+      </strong>
     </div>
   </div>
   <div class="box-body content-box">
