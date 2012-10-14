@@ -31,6 +31,7 @@ group :production do
 end
 
 gem 'devise', '2.1.0'
+gem 'factory_girl_rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
