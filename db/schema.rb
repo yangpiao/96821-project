@@ -26,12 +26,13 @@ ActiveRecord::Schema.define(:version => 20120920233040) do
   create_table "snippets", :force => true do |t|
     t.string   "name"
     t.text     "desc"
-    t.integer  "filetype",   :default => 0
+    t.integer  "filetype",    :default => 0
     t.text     "content"
-    t.datetime "time",       :default => '2012-09-20 23:41:39'
-    t.integer  "user_id",    :default => 0
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "time",        :default => '2012-09-20 23:41:39'
+    t.integer  "user_id",     :default => 0
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.boolean  "commentable"
   end
 
   create_table "users", :force => true do |t|

@@ -1,5 +1,5 @@
 class Snippet < ActiveRecord::Base
-  attr_accessible :content, :desc, :filetype, :name, :time, :user_id
+  attr_accessible :content, :desc, :filetype, :name, :time, :user_id, :commentable
   has_many :comments
   belongs_to :user
   validates :name, :presence => true, :length => { :maximum => 50 }
